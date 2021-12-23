@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Desafio 1 - HTML & CSS</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css">
+    </head >
+    
+
+    <body class="background-gremio">
+        <div class="c-wrapper">
+            <div class="row">
+                <div class="col-12">
+                    <div class="container c-app c-dark-theme">
+                        <header class="cabecalho">
+                            <p><b><strong>Qodeless - The better you are i am!</strong></b></p>
+                        </header>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col-12">
+                    <div class="container c-app c-dark-theme">
+                        <h1>Twitter</h1>
+                        <div class="row">
+                            <div class="col-5">
+                                <p><input class="form-control" type="text" id="qtdCols" placeholder="Informe a quantidade de colunas"></p>
+                            </div>
+                            <div class="col-5">
+                                <p><input class="form-control" type="text" id="qtdRows" placeholder="Informe a quantidade de linhas"></p>
+                            </div>
+                            <div class="col-2">
+                                <p><button id="btnInfoCols" class="btn btn-block btn-outline-info w-100"  onclick="InfoCols()"> Definir tamanho</button></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-10">
+                                <p><input class="form-control" type="text" id="qtdchar" placeholder="Informe o limite de caracter"></p>
+                            </div>
+                            <div class="col-2">
+                                <p><button id="btn" class="btn btn-block btn-outline-info w-100"  onclick="InfoLimitChar()"> Definir limite </button></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                           <div>Digitou <span id="countInputChar"> 0 </span> caracteres</div> 
+                            <br>
+                            <div>
+                                <p><textarea  id="text-area" class="form-control-sfy" cols="157" rows="5" maxlength="100" placeholder="Insira seu texto aqui ..."></textarea></p>
+                            </div>
+                            <br>
+                            <div>Restam <span id="count"> 100 </span> caracteres</div> 
+                        </div>    
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="container c-app c-dark-theme">
+                        <h1>Listagem de tarefas</h1>
+                        <div class="row">
+                            <div class="col-5">
+                                <p><input class="form-control" id="list-create" placeholder="Adicionar tarefa..."></p>
+                            </div>
+                            <div class="col-1">
+                                <input type="button" class="btn btn-block btn-outline-info w-100" value="Adicionar" onclick="AddList()" />
+                            </div>
+                            <div class="col-5">
+                                <p><input class="form-control" id="list-size" placeholder="Informe a quantidade de tarefas...(max 10)"></p>
+                            </div>
+                            <div class="col-1">
+                                <input type="button" class="btn btn-block btn-outline-info w-100" value="Adicionar" onclick="AddQtdList()" />
+                            </div>
+                        </div>
+                        <p id="subst" ></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="container c-app c-dark-theme">
+                        <footer class="rodape">
+                            <p>Desafio 1 - HTML & CSS</p>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html >
+
+<style type="text/css">
+    body 
+    {
+        font-family: Arial;
+    }
+    
+    header 
+    {  
+         font-size: 20px;
+        text-align: center;
+        margin-top: 15px;
+
+    }
+    div.container 
+    {   
+        margin-top: 15px;
+        padding: 10px;
+        font-size: 12px;
+        text-align: left;
+        border: solid 2px;
+        border-radius: 10px;
+    }
+    strong {
+    text-decoration: underline;
+    }
+    
+    footer
+    {
+        font-size: 12px;
+        text-align: center;
+        margin-top: 15px;
+    }
+    .c-app.c-dark-theme {
+    --primary: #4638c2;
+    --secondary: #4c4f54;
+    --success: #45a164;
+    --info: #4799eb;
+    --warning: #e1a82d;
+    --danger: #d16767;
+    --light: #6c6e7e;
+    --dark: #0e0e15;
+    color: rgba(255,255,255,.87);
+    background-color: #181924;
+    --color: rgba(255, 255, 255, 0.87);
+    --elevation-base-color: 0, 0, 0;
+    }
+    .form-control-sfy {
+    display: block;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--cui-input-color,rgba(44,56,74,.95));
+    background-color: var(--cui-input-bg,#fff);
+    background-clip: padding-box;
+    border: 1px solid var(--cui-input-border-color,#b1b7c1);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+    .background-gremio {
+        background-image: url("cosmos-universo.gif");
+        background-color: #cccccc;
+        background-repeat:repeat;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>
+
+    var limitChar = 100;
+    var limitRows = 10;
+    var countLinesUse = 0;
+    var txtList = [];
+    $(document).on("input", "#text-area", function () {
+    
+        var limite = limitChar;
+        console.log(limite);
+        var caracteresDigitados = $(this).val().length;
+        var caracteresRestantes = limite - caracteresDigitados;
+
+        $("#countInputChar").text(caracteresDigitados);
+        $("#count").text(caracteresRestantes);
+    });
+    function InfoCols(){
+        let qtdCols = document.getElementById('qtdCols').value;
+        let qtdRows = document.getElementById('qtdRows').value;
+        let txtArea = document.getElementById('text-area');
+        document.getElementById('qtdCols').value = '';
+        document.getElementById('qtdRows').value = '';
+        txtArea.cols = qtdCols;
+        txtArea.rows = qtdRows;
+        txtArea.value = "";
+
+    }
+    function InfoLimitChar() {
+        let qtdchar = document.getElementById('qtdchar').value;
+        document.getElementById('qtdchar').value = "";
+        document.getElementById('text-area').maxLength = qtdchar;
+        $("#countInputChar").text(0);
+        var txtArea = document.getElementById('text-area');
+        var count = document.getElementById('count');
+        var max = txtArea.maxLength;
+        txtArea.value = "";
+        count.textContent = max;
+        limitChar = qtdchar;
+    }
+    function AddQtdList(){
+        if(document.getElementById('list-size').value < 10 && document.getElementById('list-size').value > 0){
+            limitRows = document.getElementById('list-size').value;
+            document.getElementById('list-size').value = '';
+            while(txtList.length) {
+                txtList.pop();
+                }
+            $("#subst").empty();
+            countLinesUse = 0;
+        }else{
+            alert("Maximo são 10 tarefas e o minimo é 1!")
+        }
+
+    }
+    function AddList() {
+        txtList.push(document.getElementById('list-create').value);
+        document.getElementById('list-create').value = '';
+        if(txtList.length <= limitRows){
+            $.each( txtList, function( index, value ) {
+                if(index >= countLinesUse){
+                    $("#subst").append("<p>"+ (index+1) +" -> <strong>"+ value +"</strong></p>");  
+                    countLinesUse++;
+                }     
+            });
+        }
+    }
+
+</script>
