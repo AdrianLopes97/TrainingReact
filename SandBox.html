@@ -13,56 +13,81 @@
                 <div class="col-12">
                     <div class="container c-app c-dark-theme">
                         <header class="cabecalho">
-                            <p><b><strong>Seleção para React</strong></b></p>
+                            <p><b><strong>Cadastro de Úsuario</strong></b></p>
                         </header>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="container c-app c-dark-theme">
-                        <div class="row">
-                            <div class="col-4 form-group">
-                                <label class="form-label-sfy">Úsuario</label>
-                                <input class="form-control" type="text" placeholder="Úsuario">
+            <form id="form" action="">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="container c-app c-dark-theme">
+                            <div class="row">
+                                <div class="col-4 form-group">
+                                    <label class="form-label-sfy">Úsuario</label>
+                                    <input class="form-control" type="text" placeholder="Úsuario" id="user">
+                                </div>
+                                <div class="col-4 form-group">
+                                    <label class="form-label-sfy">Senha</label>
+                                    <input id="password-field" class="form-control" type="password" placeholder="Senha">
+                                </div>
+                                <div class="col-4 form-group">
+                                    <label class="form-label-sfy">Confirmar Senha</label>
+                                    <input id="confirm_password" class="form-control" type="password" placeholder="Confirme sua senha">
+                                    <span id='message'></span>
+                                </div>
                             </div>
-                            <div class="col-4 form-group">
-                                <label class="form-label-sfy">Senha</label>
-                                <input class="form-control" type="password" placeholder="Senha">
+                            <div class="row">
+                                <div class="col-4 form-group">
+                                    <label class="form-label-sfy">Nome completo</label>
+                                    <input id="full_name" class="form-control" type="text" placeholder="Preencha com seu nome completo">
+                                </div>
+                                <div class="col-4 form-group">
+                                    <label class="form-label-sfy">Data de nascimento</label>
+                                    <input id="birth_date" class="form-control" type="datetime-local">
+                                </div>
+                                <div class="col-4 form-group">
+                                    <label class="form-label-sfy">Celular</label>
+                                    <input id="cell" class="form-control" type="text" placeholder="Preencha com Nº de celular">
+                                </div>
                             </div>
-                            <div class="col-4 form-group">
-                                <label class="form-label-sfy">Confirmar Senha</label>
-                                <input class="form-control" type="password" placeholder="Confirme sua senha">
+                            <div class="row">
+                                <div class="col-4 form-group">
+                                    <label class="form-label-sfy">CPF</label>
+                                    <input id="cpf" class="form-control" type="text" placeholder="Preencha com seu CPF">
+                                </div>
+                                <div class="col-4 form-group">
+                                    <label class="form-label-sfy">RG</label>
+                                    <input id="rg" class="form-control" type="text" placeholder="Preencha com seu RG">
+                                </div>
+                                <div class="col-4 form-group">
+                                    <label class="form-label-sfy">CEP</label>
+                                    <input id="zipcode" class="form-control" type="text" placeholder="Preencha com cep valido">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4 form-group">
-                                <label class="form-label-sfy">Nome completo</label>
-                                <input class="form-control" type="text" placeholder="Preencha com seu nome completo">
+                            <div class="row">
+                                <div class="col-12 form-group">
+                                    <label class="form-label-sfy">E-mail</label>
+                                    <input id="email" class="form-control" type="email" placeholder="Preencha com seu e-mail">
+                                </div>
                             </div>
-                            <div class="col-4 form-group">
-                                <label class="form-label-sfy">Data de nascimento</label>
-                                <input class="form-control" type="datetime-local">
-                            </div>
-                            <div class="col-4 form-group">
-                                <label class="form-label-sfy">Telefone</label>
-                                <input class="form-control" type="text" placeholder="Confirme sua senha">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 form-group">
-                                <label class="form-label-sfy">E-mail</label>
-                                <input class="form-control" type="email" placeholder="Preencha com seu e-mail">
+                            <br>
+                            <div class="row">
+                                <div class="col-6">
+                                    <button class="btn btn-outline-success btn-sm" type="button" id="save">
+                                        <i class="fa fa-save"></i> Save
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
             <div class="row">
                 <div class="col-12">
                     <div class="container c-app c-dark-theme">
                         <footer class="rodape">
-                            <p>Desafio 2 - HTML FORMS</p><a href="Pdf/Desafio01_HTML_CSS.pdf">Ver desafio</a>
+                            <p>Desafio 2 - HTML FORMS</p><a href="pdf/Desafio02_FORM.pdf">Ver desafio</a>
                         </footer>
                     </div>
                 </div>
@@ -138,12 +163,37 @@
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     }
     .background-gremio {
-        background-image: url("Image/cosmos-universo.gif");
+        background-image: url("Image/fundo.jpg");
         background-color: #cccccc;
         background-repeat:repeat;
     }
 </style>
 <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="libs/jquery.inputmask.js"></script>
 <script>
-
+        $("#save").click(function() {
+            console.clear();
+            console.log("user -> ", $('#user').val());
+            console.log("password -> ", $('#password-field').val());
+            console.log("confirm password -> ", $('#confirm_password').val());
+            console.log("full name -> ", $('#full_name').val());
+            console.log("birth date -> ", $('#birth_date').val());
+            console.log("cell -> ", $('#cell').val());
+            console.log("CPF -> ", $('#cpf').val());
+            console.log("RG -> ", $('#rg').val());
+            console.log("ZipCode -> ", $('#zipcode').val());
+            console.log("e-mail -> ", $('#email').val());
+            $('#form').trigger("reset");
+        });
+        $('#password-field, #confirm_password').on('keyup', function () {
+            if ($('#password-field').val() == $('#confirm_password').val()) {
+                $('#message').html('Matching').css('color', 'green');
+            } else
+                $('#message').html('Not Matching').css('color', 'red');
+        });
+        $(":input").inputmask();
+        $("#rg").inputmask({"mask": "99.999.999-9"});
+        $("#cpf").inputmask({"mask": "999.999.999-99"});
+        $("#cell").inputmask({"mask": "(99) 99999-9999"});
+        $("#zipcode").inputmask({"mask": "99999-999"});
 </script>
